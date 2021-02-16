@@ -11,13 +11,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(      
       home: Scaffold(
-        appBar: AppBar(title: Text("Contoh Alignment"),),
+        appBar: AppBar(title: Text("Contoh Color"),),
         body: Container(
-         alignment: Alignment.bottomCenter,
+         margin: EdgeInsets.all(80),
+         height: 200,
+         width: 200,
+         alignment: Alignment.center,
+         color: Colors.amber[800],
          child: Text(
            'Semangat Belajar',
-           style: TextStyle(fontSize: 20,),
-         ),
+           style: TextStyle(fontSize: 20, color: Colors.white),
+         )
         )
       ), 
     );
