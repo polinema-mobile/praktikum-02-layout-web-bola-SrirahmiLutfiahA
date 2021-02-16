@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -9,7 +10,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(      
-      home: Image(image: NetworkImage('https://asset-a.grid.id/crop/0x0:0x0/700x465/photo/2019/06/10/2790018030.jpg'),), 
+      home: Container(
+        margin: EdgeInsets.only(top: 30),
+        color: Colors.white,
+        child: Column(
+          children: <Widget>[
+           AppBar(title: Text('Contoh Cupertino')),
+             CupertinoButton(
+               child: Text("Contoh button"),
+               onPressed: () {},
+         ),
+         CupertinoActivityIndicator(), 
+         ],
+        ),
+      ),
     );
   }
 }
