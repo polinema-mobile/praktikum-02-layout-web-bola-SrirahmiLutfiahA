@@ -1,4 +1,4 @@
-import 'dart:async';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,8 +10,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(      
-      title: 'Contoh Date Picker',
-      home: MyHomePage(title: 'Contoh Date Picker'), 
+      home: Scaffold(
+        appBar: AppBar(title: Text("Contoh Button"),),
+        body: Container(
+          child: RaisedButton(
+            textColor: Colors.white,
+            onPressed: () {},
+            color: Colors.red[900],
+            child:Text(
+            "Button",
+            style: TextStyle(fontSize: 20)
+            ),
+          )
+        )
+      ), 
     );
   }
 }
@@ -35,22 +47,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  DateTime selectedDate = DateTime.now();
+  int _counter = 0;
 
-  // Initial SelectDate FLutter
- Future<Null> _selectDate(BuildContext context) async {
- // Initial DateTime FIinal Picked
- final DateTime picked = await showDatePicker(
-      context: context,
-      initialDate: selectedDate,
-      firstDate: DateTime(2015, 8),
-      lastDate: DateTime(2101));
-  if (picked != null && picked != selectedDate)
+  void _incrementCounter() {
     setState(() {
-      selectedDate = picked;
+      // This call to setState tells the Flutter framework that something has
+      // changed in this State, which causes it to rerun the build method below
+      // so that the display can reflect the updated values. If we changed
+      // _counter without calling setState(), then the build method would not be
+      // called again, and so nothing would appear to happen.
+      _counter++;
     });
- }
-  
+  }
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -83,21 +92,23 @@ class _MyHomePageState extends State<MyHomePage> {
           // center the children vertically; the main axis here is the vertical
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
-          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text
-              ("${selectedDate.toLocal()}".split(' ')[0]),
-            SizedBox(height: 20.0,),
-            RaisedButton(
-              onPressed: () => {
-                _selectDate(context),
-                print(selectedDate.day + selectedDate.month  + selectedDate.year )
-            },
-              child: Text('Pilih Tanggal'),   
-            ), 
+            Text(
+              'You have pushed the button this many times:',
+            ),
+            Text(
+              '$_counter',
+              style: Theme.of(context).textTheme.headline4,
+            ),
           ],
         ),
-      ) 
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _incrementCounter,
+        tooltip: 'Increment',
+        child: Icon(Icons.add),
+      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
