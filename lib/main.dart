@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:async';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -6,25 +6,15 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(      
-      
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("Contoh TextField")
-        ),   
-      body: TextField(
-          obscureText: false,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(), 
-            labelText: 'Nama',
-          ),
-        ),  
-      ), 
+      title: 'Contoh Date Picker',
+      home: MyHomePage(title: 'Contoh Date Picker'), 
     );
   }
-} 
+}
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -45,19 +35,22 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  DateTime selectedDate = DateTime.now();
 
-  void _incrementCounter() {
+  // Initial SelectDate FLutter
+ Future<Null> _selectDate(BuildContext context) async {
+ // Initial DateTime FIinal Picked
+ final DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2015, 8),
+      lastDate: DateTime(2101));
+  if (picked != null && picked != selectedDate)
     setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
+      selectedDate = picked;
     });
-  }
-
+ }
+  
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -90,23 +83,21 @@ class _MyHomePageState extends State<MyHomePage> {
           // center the children vertically; the main axis here is the vertical
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
+            Text
+              ("${selectedDate.toLocal()}".split(' ')[0]),
+            SizedBox(height: 20.0,),
+            RaisedButton(
+              onPressed: () => {
+                _selectDate(context),
+                print(selectedDate.day + selectedDate.month  + selectedDate.year )
+            },
+              child: Text('Pilih Tanggal'),   
+            ), 
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ) 
     );
   }
 }
