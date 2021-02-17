@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(      
       home: Scaffold(
-        appBar: AppBar(title: Text("Contoh Transform"),),
+        appBar: AppBar(title: Text("Contoh Configuration"),),
         body: Container(
             decoration: BoxDecoration(
               image: const DecorationImage(
@@ -20,14 +20,13 @@ class MyApp extends StatelessWidget {
               ),
             border: Border.all(
               color: Colors.black,
-              width: 8,
+              width: 15,
               ),
+              borderRadius: BorderRadius.circular(12),
             ),
             height: 200,
-            width: 200,
-            margin: const EdgeInsets.only(left: 50.0, right: 30.0,
-            top: 30),
-              transform: Matrix4.rotationZ(-0.2),
+            width: 300,
+            margin: EdgeInsets.all(30),
         )
       ), 
     );
